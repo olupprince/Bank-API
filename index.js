@@ -59,16 +59,18 @@ const productSchema = mongoose.Schema({
   name: String,
   price: Number,
   description: String,
+  // rating: number,
 });
 
 const Product = mongoose.model("Product", productSchema);
 
 app.post("/products", (req, res) => {
-  const { name, price, description } = req.body;
+  const { value, error } = req.body;
   const newProduct = new Product({
-    name,
-    price,
-    description,
+    name: value.name,
+    price: value.price,
+    description: value.description,
+    // rating: value.rating,
   });
   newProduct.save();
   res.status(201).send(newProduct);
